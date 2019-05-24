@@ -88,7 +88,7 @@ const mmxPasscodeGenerator = function (options) {
       }
     },
     p2: function () {
-      if (this.getStageTotals.hearts & 1) {
+      if (this.getStageTotals().hearts & 1) {
         if (this.stages.flameMammoth.defeated && this.stages.stormEagle.capsule) {
           return 1;
         } else if (this.stages.flameMammoth.defeated) {
