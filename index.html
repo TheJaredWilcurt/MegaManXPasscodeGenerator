@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Megaman X Passcode Generator</title>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/vue@2.5.17/dist/vue.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/http-vue-loader@1.3.5/src/httpVueLoader.js"></script>
+  </head>
+  <body>
+    <div id="app">
+      <passcode-generator></passcode-generator>
+    </div>
+    <script type="text/javascript">
+      const app = new Vue({
+        name: 'app',
+        el: '#app',
+        components: {
+          'passcode-generator': httpVueLoader('./vue/mmxpasscode.vue')
+        }
+      });
+    </script>
+  </body>
+</html>
