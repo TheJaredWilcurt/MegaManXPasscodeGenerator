@@ -329,7 +329,7 @@ module.exports = {
       });
       return passcode;
     },
-    expectedPassscode: function () {
+    expectedPasscode: function () {
       return mmxPasscodeGenerator(this.stages) || [];
     }
   },
