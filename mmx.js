@@ -1,4 +1,277 @@
 // eslint-disable-next-line no-unused-vars
+const mmxReversePassword = function (password) {
+  if (typeof(password) === 'number') {
+    password = password + '';
+  }
+  if (typeof(password) === 'string') {
+    password = password.split('');
+  }
+  if (!Array.isArray(password)) {
+    console.log('Password type is invalid');
+    return;
+  }
+  if (password.length !== 12) {
+    console.log('Password must contain exactly 12 digits');
+    return;
+  }
+  password = password.map(function (digit) {
+    return Number(digit);
+  });
+
+  const generator = {
+    stages: {
+      armoredArmadillo: {
+        defeated: false,
+        heart: false,
+        subTank: false
+      },
+      boomerKuwanger: {
+        defeated: false,
+        heart: false
+      },
+      chillPenguin: {
+        capsule: false,
+        defeated: false,
+        heart: false
+      },
+      flameMammoth: {
+        capsule: false,
+        defeated: false,
+        heart: false,
+        subTank: false
+      },
+      launchOctopus: {
+        defeated: false,
+        heart: false
+      },
+      sparkMandrill: {
+        defeated: false,
+        heart: false,
+        subTank: false
+      },
+      stingChameleon: {
+        capsule: false,
+        defeated: false,
+        heart: false
+      },
+      stormEagle: {
+        capsule: false,
+        defeated: false,
+        heart: false,
+        subTank: false
+      }
+    },
+    p1: function () {
+      const p1 = password[1 - 1];
+      if (p1 === 8) {
+        this.stages.armoredArmadillo.subTank = true;
+        this.stages.chillPenguin.heart = true;
+      } else if (p1 === 6) {
+        this.stages.armoredArmadillo.subTank = true;
+      } else if (p1 === 2) {
+        this.stages.chillPenguin.heart = true;
+      } else if (p1 === 3) {
+        this.stages.armoredArmadillo.subTank = true;
+        this.stages.chillPenguin.heart = true;
+      } else if (p1 === 5) {
+        this.stages.armoredArmadillo.subTank = true;
+      } else if (p1 === 7) {
+        this.stages.chillPenguin.heart = true;
+      }
+    },
+    p2: function () {
+      const p2 = password[2 - 1];
+      if (p2 === 1) {
+        this.stages.flameMammoth.defeated = true;
+        this.stages.stormEagle.capsule = true;
+      } else if (p2 === 2) {
+        this.stages.flameMammoth.defeated = true;
+      } else if (p2 === 5) {
+        this.stages.stormEagle.capsule = true;
+      } else if (p2 === 4) {
+        this.stages.flameMammoth.defeated = true;
+        this.stages.stormEagle.capsule = true;
+      } else if (p2 === 3) {
+        this.stages.flameMammoth.defeated = true;
+      } else if (p2 === 6) {
+        this.stages.stormEagle.capsule = true;
+      }
+    },
+    p3: function () {
+      const p3 = password[3 - 1];
+      if (p3 === 4) {
+        this.stages.flameMammoth.subTank = true;
+        this.stages.flameMammoth.heart = true;
+      } else if (p3 === 2) {
+        this.stages.flameMammoth.subTank = true;
+      } else if (p3 === 7) {
+        this.stages.flameMammoth.heart = true;
+      }
+    },
+    p4: function () {
+      const p4 = password[4 - 1];
+      if (p4 === 1) {
+        this.stages.stormEagle.defeated = true;
+        this.stages.stormEagle.heart = true;
+      } else if (p4 === 7) {
+        this.stages.stormEagle.defeated = true;
+      } else if (p4 === 8) {
+        this.stages.stormEagle.heart = true;
+      }
+    },
+    p5: function () {
+      const p5 = password[5 - 1];
+      if (p5 === 2) {
+        this.stages.launchOctopus.defeated = true;
+        this.stages.stingChameleon.capsule = true;
+      } else if (p5 === 4) {
+        this.stages.launchOctopus.defeated = true;
+      } else if (p5 === 7) {
+        this.stages.stingChameleon.capsule = true;
+      } else if (p5 === 3) {
+        this.stages.launchOctopus.defeated = true;
+        this.stages.stingChameleon.capsule = true;
+      } else if (p5 === 6) {
+        this.stages.launchOctopus.defeated = true;
+      } else if (p5 === 5) {
+        this.stages.stingChameleon.capsule = true;
+      }
+    },
+    p6: function () {
+      const p6 = password[6 - 1];
+      if (p6 === 3) {
+        this.stages.boomerKuwanger.defeated = true;
+        this.stages.boomerKuwanger.heart = true;
+      } else if (p6 === 2) {
+        this.stages.boomerKuwanger.defeated = true;
+      } else if (p6 === 5) {
+        this.stages.boomerKuwanger.heart = true;
+      } else if (p6 === 1) {
+        this.stages.boomerKuwanger.defeated = true;
+        this.stages.boomerKuwanger.heart = true;
+      } else if (p6 === 8) {
+        this.stages.boomerKuwanger.defeated = true;
+      } else if (p6 === 6) {
+        this.stages.boomerKuwanger.heart = true;
+      }
+    },
+    p7: function () {
+      const p7 = password[7 - 1];
+      if (p7 === 7) {
+        this.stages.armoredArmadillo.defeated = true;
+        this.stages.flameMammoth.capsule = true;
+      } else if (p7 === 4) {
+        this.stages.armoredArmadillo.defeated = true;
+      } else if (p7 === 2) {
+        this.stages.flameMammoth.capsule = true;
+      } else if (p7 === 3) {
+        this.stages.armoredArmadillo.defeated = true;
+        this.stages.flameMammoth.capsule = true;
+      } else if (p7 === 5) {
+        this.stages.armoredArmadillo.defeated = true;
+      } else if (p7 === 6) {
+        this.stages.flameMammoth.capsule = true;
+      }
+    },
+    p8: function () {
+      const p8 = password[8 - 1];
+      if (p8 === 6) {
+        this.stages.sparkMandrill.defeated = true;
+        this.stages.stingChameleon.heart = true;
+      } else if (p8 === 7) {
+        this.stages.sparkMandrill.defeated = true;
+      } else if (p8 === 2) {
+        this.stages.stingChameleon.heart = true;
+      }
+    },
+    p9: function () {
+      const p9 = password[9 - 1];
+      if (p9 === 4) {
+        this.stages.chillPenguin.capsule = true;
+        this.stages.armoredArmadillo.heart = true;
+      } else if (p9 === 1) {
+        this.stages.chillPenguin.capsule = true;
+      } else if (p9 === 2) {
+        this.stages.armoredArmadillo.heart = true;
+      } else if (p9 === 6) {
+        this.stages.chillPenguin.capsule = true;
+        this.stages.armoredArmadillo.heart = true;
+      } else if (p9 === 8) {
+        this.stages.chillPenguin.capsule = true;
+      } else if (p9 === 5) {
+        this.stages.armoredArmadillo.heart = true;
+      }
+    },
+    p10: function () {
+      const p10 = password[10 - 1];
+      if (p10 === 4) {
+        this.stages.stingChameleon.defeated = true;
+        this.stages.stormEagle.subTank = true;
+      } else if (p10 === 6) {
+        this.stages.stingChameleon.defeated = true;
+      } else if (p10 === 5) {
+        this.stages.stormEagle.subTank = true;
+      }
+    },
+    p11: function () {
+      const p11 = password[11 - 1];
+      if (p11 === 6) {
+        this.stages.launchOctopus.heart = true;
+        this.stages.sparkMandrill.subTank = true;
+      } else if (p11 === 3) {
+        this.stages.launchOctopus.heart = true;
+      } else if (p11 === 7) {
+        this.stages.sparkMandrill.subTank = true;
+      } else if (p11 === 2) {
+        this.stages.launchOctopus.heart = true;
+        this.stages.sparkMandrill.subTank = true;
+      } else if (p11 === 5) {
+        this.stages.launchOctopus.heart = true;
+      } else if (p11 === 8) {
+        this.stages.sparkMandrill.subTank = true;
+      }
+    },
+    p12: function () {
+      const p12 = password[12 - 1];
+      if (p12 === 1) {
+        this.stages.chillPenguin.defeated = true;
+        this.stages.sparkMandrill.heart = true;
+      } else if (p12 === 6) {
+        this.stages.chillPenguin.defeated = true;
+      } else if (p12 === 4) {
+        this.stages.sparkMandrill.heart = true;
+      }
+    },
+    resetStages: function () {
+      Object.keys(this.stages).forEach(function (stage) {
+        Object.keys(this.stages[stage]).forEach(function (upgrade) {
+          this.stages[stage][upgrade] = false;
+        }.bind(this));
+      }.bind(this));
+    },
+    updateStages: function () {
+      this.resetStages();
+      this.p1();
+      this.p2();
+      this.p3();
+      this.p4();
+      this.p5();
+      this.p6();
+      this.p7();
+      this.p8();
+      this.p9();
+      this.p10();
+      this.p11();
+      this.p12();
+
+      return this.stages;
+    }
+  };
+
+  return generator.updateStages();
+};
+
+// eslint-disable-next-line no-unused-vars
 const mmxPasscodeGenerator = function (options) {
   const generator = {
     stages: {
