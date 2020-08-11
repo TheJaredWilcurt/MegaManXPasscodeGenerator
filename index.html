@@ -47,6 +47,14 @@
               mmxHelpers.pushNewUrl(params);
             }
           }
+        },
+        watch: {
+          generate: function () {
+            this.setUrlParams();
+          }
+        },
+        created: function () {
+          this.setDataFromUrlParams();
         }
       });
     </script>
