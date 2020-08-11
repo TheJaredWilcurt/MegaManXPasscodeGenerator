@@ -349,7 +349,7 @@ module.exports = {
       return passcode;
     },
     expectedPassscode: function () {
-      return window.mmxPasscodeGenerator(this.stages);
+      return mmxPasscodeGenerator(this.stages);
     }
   },
   watch: {
