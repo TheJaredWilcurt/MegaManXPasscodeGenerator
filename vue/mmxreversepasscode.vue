@@ -26,10 +26,10 @@
       <label>
         <strong>Passcode:</strong>
         <input v-model="password" />
-        <template v-if="passcode.length === 12 && passcode.join('') === expectedPassscode.join('')">
+        <template v-if="passcode.length === 12 && passcode.join('') === expectedPasscode.join('')">
           (Valid passcode)
         </template>
-        <template v-if="passcode.length === 12 && passcode.join('') !== expectedPassscode.join('')">
+        <template v-if="passcode.length === 12 && passcode.join('') !== expectedPasscode.join('')">
           (Glitchy passcode, closest valid: {{ expectedPasscode.join('') }})
         </template>
       </label>
