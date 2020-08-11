@@ -22,14 +22,14 @@
         </div>
       </div>
     </div>
-    <div class="code-container">
+    <div>
       <label>
-        Passcode:
+        <strong>Passcode:</strong>
         <input v-model="password" />
       </label>
-      <span v-if="password && passcode.length !== 12" class="warning">
+      <div v-if="password && passcode.length !== 12" class="warning">
         Passcode must contain exactly 12 digits.
-      </span>
+      </div>
     </div>
   </div>
 </template>
@@ -295,6 +295,40 @@ module.exports = {
       this.p10();
       this.p11();
       this.p12();
+    },
+    parseUrlParams: function () {
+      // '?passcode=1111-1111-1111&generate=false' => 'passcode=1111-1111-1111&generate=false'
+      let paramsUrl = location.search.replace('?', '');
+      // 'passcode=1111-1111-1111&generate=false' => ['passcode=1111-1111-1111', 'generate=false']
+      let paramPairs = paramsUrl.split('&');
+
+      let params = {};
+
+      // ['passcode=1111-1111-1111', 'generate=false'].forEach
+      paramPairs.forEach(function (paramPair) {
+        // 'generate=false' => 'generate'
+        let key = paramPair.split('=')[0];
+        // 'generate=false' => 'false'
+        let value = paramPair.split('=')[1];
+
+        if (value === 'false') {
+          params[key] = false;
+        } else if (value === 'true') {
+          params[key] = true;
+        } else {
+          params[key] = value;
+        }
+      });
+
+      if (params.passcode) {
+        this.password = params.passcode;
+      }
+    },
+    setUrlParams: function () {
+      if (history.pushState) {
+        let newurl = window.location.protocol + '//' + window.location.host + window.location.pathname + '?passcode=' + this.password;
+        window.history.pushState({ path: newurl }, '', newurl);
+      }
     }
   },
   computed: {
@@ -313,8 +347,12 @@ module.exports = {
     passcode: function (code) {
       if (code.length === 12) {
         this.updateStages();
+        this.setUrlParams();
       }
     }
+  },
+  created: function () {
+    this.parseUrlParams();
   }
 };
 </script>
