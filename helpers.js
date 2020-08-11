@@ -28,5 +28,10 @@ const mmxHelpers = {
         return param + '=' + params[param];
       })
       .join('&');
+  },
+  pushNewUrl: function (params) {
+    params = this.paramsToString(params);
+    let newurl = window.location.protocol + '//' + window.location.host + window.location.pathname + '?' + params;
+    window.history.pushState({ path: newurl }, '', newurl);
   }
 };
