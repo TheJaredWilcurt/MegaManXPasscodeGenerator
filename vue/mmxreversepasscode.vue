@@ -26,6 +26,12 @@
       <label>
         <strong>Passcode:</strong>
         <input v-model="password" />
+        <template v-if="passcode.length === 12 && passcode.join('') === expectedPassscode.join('')">
+          (Valid passcode)
+        </template>
+        <template v-if="passcode.length === 12 && passcode.join('') !== expectedPassscode.join('')">
+          (Glitchy passcode, closest valid: {{ expectedPasscode.join('') }})
+        </template>
       </label>
       <div v-if="password && passcode.length !== 12" class="warning">
         Passcode must contain exactly 12 digits.
@@ -341,6 +347,9 @@ module.exports = {
         return Number(digit);
       });
       return passcode;
+    },
+    expectedPassscode: function () {
+      return window.mmxPasscodeGenerator(this.stages);
     }
   },
   watch: {
