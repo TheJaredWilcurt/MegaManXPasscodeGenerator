@@ -7,16 +7,34 @@
   </head>
   <body>
     <div id="app">
-      <passcode-generator></passcode-generator>
+      <div class="center">
+        <label>
+          <input v-model="generate" type="checkbox">
+          Generate or Reverse
+        </label>
+      </div>
+      <passcode-generator v-if="generate"></passcode-generator>
+      <reverse-passcode v-else></reverse-passcode>
     </div>
     <script type="text/javascript">
       const app = new Vue({
         name: 'app',
         el: '#app',
         components: {
-          'passcode-generator': httpVueLoader('./vue/mmxpasscode.vue')
+          'passcode-generator': httpVueLoader('./vue/mmxpasscode.vue'),
+          'reverse-passcode': httpVueLoader('./vue/mmxreversepasscode.vue')
+        },
+        data: function () {
+          return {
+            generate: true
+          };
         }
       });
     </script>
+    <style>
+      .center {
+        text-align: center;
+      }
+    </style>
   </body>
 </html>
