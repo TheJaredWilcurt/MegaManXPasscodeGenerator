@@ -4,6 +4,7 @@
     <title>Megaman X Passcode Generator</title>
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/vue@2.5.17/dist/vue.js"></script>
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/http-vue-loader@1.3.5/src/httpVueLoader.js"></script>
+    <script type="text/javascript" src="helpers.js"></script>
     <script type="text/javascript" src="mmx.js"></script>
   </head>
   <body>
@@ -29,6 +30,23 @@
           return {
             generate: true
           };
+        },
+        methods: {
+          setDataFromUrlParams: function () {
+            let params =  mmxHelpers.parseUrlParams();
+            if (typeof(params.generate) === 'boolean') {
+              this.generate = params.generate;
+            }
+          },
+          setUrlParams: function () {
+            if (history.pushState) {
+              let params = mmxHelpers.parseUrlParams();
+
+              params.generate = this.generate;
+
+              mmxHelpers.pushNewUrl(params);
+            }
+          }
         }
       });
     </script>
