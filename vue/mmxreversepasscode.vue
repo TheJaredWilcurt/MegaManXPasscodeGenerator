@@ -310,8 +310,10 @@ module.exports = {
     }
   },
   watch: {
-    passcode: function () {
-      this.updateStages();
+    passcode: function (code) {
+      if (code.length === 12) {
+        this.updateStages();
+      }
     }
   }
 };
