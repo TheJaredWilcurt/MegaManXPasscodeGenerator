@@ -20,5 +20,13 @@ const mmxHelpers = {
       }
     });
     return params;
+  },
+  paramsToString: function (params) {
+    // { generate: true, passcode: '1111-2222-3333' } => 'generate=true&passcode=1111-2222-3333'
+    return Object.keys(params)
+      .map(function (param) {
+        return param + '=' + params[param];
+      })
+      .join('&');
   }
 };
